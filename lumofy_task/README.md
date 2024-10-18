@@ -1,54 +1,91 @@
-# lumofy_task
+# Lumofy Task: File Upload Feature with Django REST API
 
-Behold My Awesome Project!
+## Objective
 
-[![Built with Cookiecutter Django](https://img.shields.io/badge/built%20with-Cookiecutter%20Django-ff69b4.svg?logo=cookiecutter)](https://github.com/cookiecutter/cookiecutter-django/)
-[![Ruff](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/v2.json)](https://github.com/astral-sh/ruff)
+This task implements a Django REST API that allows users to:
+- Upload files
+- List all uploaded files
+- Retrieve a specific file by its ID
+- Bonus: File size validation using environment variables and filtering files by type (e.g., PDF, images) using `django-filter`.
 
-License: MIT
 
-## Settings
+## Setup Instructions
 
-Moved to [settings](http://cookiecutter-django.readthedocs.io/en/latest/settings.html).
+### 1. Clone the Repository
 
-## Basic Commands
+```bash
+git clone <repository_url>
+cd lumofy_task
+```
+### 2. Set Up Your Environment Variables
 
-### Setting Up Your Users
+Go to a .envs folder and .local or .production folder and open .django file and set the maximum file size in megabytes:
+```bash
+MAX_FILE_SIZE_MB=5
+```
 
-- To create a **normal user account**, just go to Sign Up and fill out the form. Once you submit it, you'll see a "Verify Your E-mail Address" page. Go to your console to see a simulated email verification message. Copy the link into your browser. Now the user's email should be verified and ready to go.
+### 3. Set Up Docker and Start the Project
 
-- To create a **superuser account**, use this command:
+This project uses Docker for running the application. The provided Makefile simplifies the process.
 
-      $ python manage.py createsuperuser
+Build and start the project:
+```
+make upbuild
+```
 
-For convenience, you can keep your normal user logged in on Chrome and your superuser logged in on Firefox (or similar), so that you can see how the site behaves for both kinds of users.
 
-### Type checks
 
-Running type checks with mypy:
+If you only want to start the containers (without building):
+```
+make up
+```
 
-    $ mypy lumofy_task
+## API Endpoints
 
-### Test coverage
+##### The API provides the following endpoints for file upload and management:
 
-To run the tests, check your test coverage, and generate an HTML coverage report:
+### 1. Upload a File
 
-    $ coverage run -m pytest
-    $ coverage html
-    $ open htmlcov/index.html
+- Endpoint: /api/files/upload/
+- Method: POST
+- Body: Send the file in a multipart/form-data request under the file key.
 
-#### Running tests with pytest
+##### Example
+```
+curl -X POST http://localhost:8000/api/files/upload/ \
+  -F 'file=@/path/to/your/file.pdf'
+```
 
-    $ pytest
+### 2. List All Uploaded Files
+- Endpoint: /api/files/
+- Method: GET
 
-### Live reloading and Sass CSS compilation
+##### You can also filter by file type (e.g., pdf, jpg, etc.):
+```
+curl http://localhost:8000/api/files/?file_type=pdf
+```
+### 3. Retrieve a File by ID
 
-Moved to [Live reloading and SASS compilation](https://cookiecutter-django.readthedocs.io/en/latest/developing-locally.html#sass-compilation-live-reloading).
+- Endpoint: /api/files/<id>/
+- Method: GET
 
-## Deployment
+Example:
+```
+    curl http://localhost:8000/api/files/1/
+```
 
-The following details how to deploy this application.
 
-### Docker
+### Makefile Commands
 
-See detailed [cookiecutter-django Docker documentation](http://cookiecutter-django.readthedocs.io/en/latest/deployment-with-docker.html).
+### The provided Makefile contains common commands for managing Docker containers and Django operations.
+
+- Build and run containers: make upbuild
+- Start containers: make up
+- Run migrations: make migrate
+- Create superuser: make superuser
+- Open Django shell: make shell
+- Run tests: make test
+- Stop containers: make down
+- Destroy containers and volumes: make destroy
+
+## ** You can run any of the above commands easily by typing the desired make command. ** 

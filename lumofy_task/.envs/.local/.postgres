@@ -1,0 +1,7 @@
+# PostgreSQL
+# ------------------------------------------------------------------------------
+POSTGRES_HOST=postgres
+POSTGRES_PORT=5432
+POSTGRES_DB=lumofy_task
+POSTGRES_USER=yrIFgwKAFUxtHSHNTSZyLFGdABbcyhzR
+POSTGRES_PASSWORD=igLsMoTtvBOi7zxgy1NJq5qARG3csoxkIUq1FiUU2CSjYiVYvxtRGF5Q6xivAFx0

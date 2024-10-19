@@ -30,13 +30,8 @@ For detailed documentation and setup instructions for this task, see the followi
 
 ## Section 3: Code Review & Engineering Mindset (45 minutes)
 
-**Problem**: Review a Django view that handles user registration, identify potential improvements, and refactor the code.
 
-**Tasks**:
-- Highlight at least 3 potential improvements in terms of performance, security, and maintainability.
-- Refactor the code to address the issues you found.
-
-*This section is still under development and will be updated soon.*
+[**Code Review & Engineering Mindset Task**](https://github.com/ehapsamy0/lumofy/blob/main/lumofy_code_review/README.md)
 
 ---
 
